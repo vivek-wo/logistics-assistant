@@ -21,65 +21,28 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("t_company")
-public class Company implements Serializable {
+@TableName("t_departure")
+public class Departure implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 公司Id
+     * 发车Id
      */
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     /**
-     * 公司名称
+     * 专线Id
      */
-    private String name;
+    @TableField("dedicatedLineId")
+    private Long dedicatedLineId;
 
     /**
-     * 经度
+     * 发车时间
      */
-    private String lng;
-
-    /**
-     * 纬度
-     */
-    private String lat;
-
-    /**
-     * 地区
-     */
-    private String region;
-
-    /**
-     * 详细地址
-     */
-    private String address;
-
-    /**
-     * 营业执照图片路径
-     */
-    @TableField("licensePath")
-    private String licensePath;
-
-    /**
-     * 公司门头照路径
-     */
-    @TableField("doorImagePath")
-    private String doorImagePath;
-
-    /**
-     * 道路运输许可证图片路径
-     */
-    @TableField("roadLicensePath")
-    private String roadLicensePath;
-
-    /**
-     * 公司法人Id
-     */
-    @TableField("legalUserId")
-    private Long legalUserId;
+    @TableField("startDepartureTime")
+    private LocalDateTime startDepartureTime;
 
     /**
      * 创建时间

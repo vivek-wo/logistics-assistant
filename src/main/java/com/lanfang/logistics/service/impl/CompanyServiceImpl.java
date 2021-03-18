@@ -1,8 +1,8 @@
 package com.lanfang.logistics.service.impl;
 
-import com.lanfang.logistics.entity.User;
-import com.lanfang.logistics.mapper.UserMapper;
-import com.lanfang.logistics.service.IUserService;
+import com.lanfang.logistics.entity.Company;
+import com.lanfang.logistics.mapper.CompanyMapper;
+import com.lanfang.logistics.service.ICompanyService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +15,6 @@ import org.springframework.stereotype.Service;
  * @since 2021-03-18
  */
 @Service
-public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
+public class CompanyServiceImpl extends ServiceImpl<CompanyMapper, Company> implements ICompanyService {
 
 }

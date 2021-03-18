@@ -18,8 +18,50 @@ public class UserForm {
     private String phone;
 
     @ApiModelProperty("身份证正面图片")
-    private MultipartFile idCardFront;
+    private MultipartFile idCardFrontFile;
 
     @ApiModelProperty("身份证反面图片")
-    private MultipartFile idCardBack;
+    private MultipartFile idCardBackFile;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public MultipartFile getIdCardFrontFile() {
+        return idCardFrontFile;
+    }
+
+    public void setIdCardFrontFile(MultipartFile idCardFrontFile) {
+        this.idCardFrontFile = idCardFrontFile;
+    }
+
+    public MultipartFile getIdCardBackFile() {
+        return idCardBackFile;
+    }
+
+    public void setIdCardBackFile(MultipartFile idCardBackFile) {
+        this.idCardBackFile = idCardBackFile;
+    }
+
+    @Override
+    public String toString() {
+        return "UserForm{" +
+                "name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", idCardFrontFile=" + idCardFrontFile +
+                ", idCardBackFile=" + idCardBackFile +
+                '}';
+    }
 }

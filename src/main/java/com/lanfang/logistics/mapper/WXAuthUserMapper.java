@@ -1,6 +1,6 @@
 package com.lanfang.logistics.mapper;
 
-import com.lanfang.logistics.entity.User;
+import com.lanfang.logistics.entity.WXAuthUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author vivek
  * @since 2021-03-18
  */
-public interface UserMapper extends BaseMapper<User> {
+public interface WXAuthUserMapper extends BaseMapper<WXAuthUser> {
 
 }

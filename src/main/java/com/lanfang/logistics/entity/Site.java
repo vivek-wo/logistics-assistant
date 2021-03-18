@@ -21,65 +21,71 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("t_company")
-public class Company implements Serializable {
+@TableName("t_site")
+public class Site implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 公司Id
+     * 网点Id
      */
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     /**
-     * 公司名称
+     * 网点名称
      */
     private String name;
 
     /**
-     * 经度
+     * 网点经度
      */
     private String lng;
 
     /**
-     * 纬度
+     * 网点纬度
      */
     private String lat;
 
     /**
-     * 地区
+     * 网点地区
      */
     private String region;
 
     /**
-     * 详细地址
+     * 网点地址
      */
     private String address;
 
     /**
-     * 营业执照图片路径
+     * 网点联系人
      */
-    @TableField("licensePath")
-    private String licensePath;
+    @TableField("contactUser")
+    private String contactUser;
 
     /**
-     * 公司门头照路径
+     * 网点联系电话
      */
-    @TableField("doorImagePath")
-    private String doorImagePath;
+    @TableField("contactPhone")
+    private String contactPhone;
 
     /**
-     * 道路运输许可证图片路径
+     * 网点开始营业时间
      */
-    @TableField("roadLicensePath")
-    private String roadLicensePath;
+    @TableField("startTime")
+    private LocalDateTime startTime;
 
     /**
-     * 公司法人Id
+     * 网点结束营业时间
      */
-    @TableField("legalUserId")
-    private Long legalUserId;
+    @TableField("endTime")
+    private LocalDateTime endTime;
+
+    /**
+     * 公司Id
+     */
+    @TableField("companyId")
+    private Long companyId;
 
     /**
      * 创建时间

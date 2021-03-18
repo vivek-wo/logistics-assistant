@@ -3,7 +3,6 @@ package com.lanfang.logistics.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 import lombok.Data;
@@ -21,65 +20,41 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("t_user")
-public class User implements Serializable {
+@TableName("t_wxauth_user")
+public class WXAuthUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 用户Id
+     * Id
      */
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     /**
-     * 用户账号
+     * 用户Id
      */
-    private String account;
+    @TableField("userId")
+    private Long userId;
 
     /**
-     * 用户密码
+     * 微信code
      */
-    private String password;
+    private String code;
 
     /**
-     * 用户姓名
+     * 微信openId
      */
-    private String name;
+    @TableField("openId")
+    private String openId;
 
     /**
-     * 用户手机号码
+     * 微信昵称
      */
-    private String phone;
+    private String nick;
 
-    /**
-     * 用户头像路径
-     */
     @TableField("photoPath")
     private String photoPath;
-
-    /**
-     * 用户身份证正面路径
-     */
-    @TableField("idcardFrontPath")
-    private String idcardFrontPath;
-
-    /**
-     * 用户身份证反面路径
-     */
-    @TableField("idcardBackPath")
-    private String idcardBackPath;
-
-    /**
-     * 用户类型
-     */
-    private Integer type;
-
-    /**
-     * 创建时间
-     */
-    @TableField("createTime")
-    private LocalDateTime createTime;
 
 
 }

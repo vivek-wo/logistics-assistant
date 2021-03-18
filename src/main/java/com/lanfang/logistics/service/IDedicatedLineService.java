@@ -1,6 +1,6 @@
 package com.lanfang.logistics.service;
 
-import com.lanfang.logistics.entity.User;
+import com.lanfang.logistics.entity.DedicatedLine;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author vivek
  * @since 2021-03-18
  */
-public interface IUserService extends IService<User> {
+public interface IDedicatedLineService extends IService<DedicatedLine> {
 
 }
