@@ -1,5 +1,6 @@
 package com.lanfang.logistics.controller;
 
+
 import com.lanfang.logistics.vo.ResultVo;
 import com.lanfang.logistics.vo.WXAuthVo;
 import io.swagger.annotations.Api;
@@ -7,12 +8,21 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * <p>
+ *  前端控制器
+ * </p>
+ *
+ * @author vivek
+ * @since 2021-03-18
+ */
 @Api("微信授权管理")
 @RestController
 @RequestMapping("/api")
-public class WXAuthController {
+public class WXAuthUserController {
 
     @ApiOperation("微信小程序登录")
     @PostMapping("/v0/wx/wxLogin")
@@ -24,5 +34,4 @@ public class WXAuthController {
         //获取用户信息
         return ResultVo.success(wxAuthVo);
     }
-
 }
