@@ -13,11 +13,11 @@ import javax.validation.constraints.NotEmpty;
 public class CompanyForm {
 
     @ApiModelProperty("公司法人Id")
-//    @Min(value = 1, message = "公司法人Id错误")
+    @Min(value = 1, message = "公司法人Id错误")
     private long legalUserId;
 
     @ApiModelProperty("公司名称")
-//    @NotEmpty(message = "公司名称不能为空")
+    @NotEmpty(message = "公司名称不能为空")
     private String name;
 
     @ApiModelProperty("公司所在经度")
@@ -27,11 +27,11 @@ public class CompanyForm {
     private double lat;
 
     @ApiModelProperty("公司所在地区")
-//    @NotEmpty(message = "公司所在地区不能为空")
+    @NotEmpty(message = "公司所在地区不能为空")
     private String region;
 
     @ApiModelProperty("公司所在详细地址")
-//    @NotEmpty(message = "公司地址不能为空")
+    @NotEmpty(message = "公司地址不能为空")
     private String address;
 
     @ApiModelProperty("公司营业执照图片")

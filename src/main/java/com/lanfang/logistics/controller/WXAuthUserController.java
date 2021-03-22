@@ -32,6 +32,6 @@ public class WXAuthUserController {
         wxAuthVo.setToken("123456789");
         wxAuthVo.setNickName("成功YES");
         //获取用户信息
-        return ResultVo.success(wxAuthVo);
+        return ResultVo.successWidthBody(wxAuthVo);
     }
 }

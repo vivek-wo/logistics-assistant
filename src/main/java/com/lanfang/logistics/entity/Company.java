@@ -1,15 +1,11 @@
 package com.lanfang.logistics.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-
-import java.time.LocalDateTime;
-
-import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.*;
 
 import java.io.Serializable;
+import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -29,6 +25,16 @@ import lombok.experimental.Accessors;
 public class Company implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    public Company() {
+    }
+
+    public Company(String name, String region, String address, Long legalUserId) {
+        this.name = name;
+        this.region = region;
+        this.address = address;
+        this.legalUserId = legalUserId;
+    }
 
     /**
      * 公司Id
@@ -88,8 +94,9 @@ public class Company implements Serializable {
     /**
      * 创建时间
      */
-    @TableField("createTime")
-    private LocalDateTime createTime;
+    @TableField(value = "createTime", fill = FieldFill.INSERT)
+    @JsonFormat(pattern = "yyyy-MM-dd HH-mm-ss")
+    private Date createTime;
 
 
 }

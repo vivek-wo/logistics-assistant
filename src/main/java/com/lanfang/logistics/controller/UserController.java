@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author vivek
@@ -28,6 +28,6 @@ public class UserController {
     @ApiOperation("创建用户")
     @PostMapping("/v0/user/createUser")
     public ResultVo<Long> createUser(@Validated @ApiParam(value = "用户信息") UserForm userForm) {
-        return ResultVo.success(123L);
+        return ResultVo.successWidthBody(123L);
     }
 }

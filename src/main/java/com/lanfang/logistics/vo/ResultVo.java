@@ -32,10 +32,17 @@ public class ResultVo<T> {
         this.data = data;
     }
 
-    public static <T> ResultVo<T> success(T t) {
+    public static <T> ResultVo<T> successWidthBody(T t) {
         ResultVo<T> resultVo = new ResultVo<>();
         resultVo.setCode(200);
         resultVo.setData(t);
+        return resultVo;
+    }
+
+    public static ResultVo successOnlyMessage(String msg) {
+        ResultVo resultVo = new ResultVo();
+        resultVo.setCode(200);
+        resultVo.setMsg(msg);
         return resultVo;
     }
 
@@ -44,7 +51,13 @@ public class ResultVo<T> {
         resultVo.setCode(code);
         resultVo.setMsg(msg);
         return resultVo;
+    }
 
+    public static ResultVo errorWidthService(String msg) {
+        ResultVo resultVo = new ResultVo();
+        resultVo.setCode(400);
+        resultVo.setMsg(msg);
+        return resultVo;
     }
 
 }

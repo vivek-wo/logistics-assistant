@@ -1,4 +1,8 @@
 package com.lanfang.logistics.vo;
 
-public class CompanyVo {
+import com.lanfang.logistics.entity.Company;
+import lombok.Data;
+
+@Data
+public class CompanyVo extends Company {
 }
