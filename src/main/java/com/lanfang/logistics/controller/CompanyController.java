@@ -10,6 +10,7 @@ import com.lanfang.logistics.vo.CompanyVo;
 import com.lanfang.logistics.vo.ResultVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ClassUtils;
@@ -60,7 +61,6 @@ public class CompanyController {
                 || companyForm.getRoadTransportFile() != null) {
 //        String path = ClassUtils.getDefaultClassLoader().getResource("static/images").getPath();
             String basePath = request.getServletContext().getRealPath(propertiesConfiguration.getUploadFilePath());
-            System.out.println("-------- : " + basePath);
             try {
                 if (companyForm.getLicenseFile() != null) {
                     String localPath = UploadFileUtils.saveImageFile(basePath, companyForm.getLicenseFile());

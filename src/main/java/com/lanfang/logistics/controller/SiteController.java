@@ -6,6 +6,7 @@ import com.lanfang.logistics.vo.CompanySiteVo;
 import com.lanfang.logistics.vo.ResultVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +30,7 @@ public class SiteController {
 
     @ApiOperation("创建公司网点")
     @PostMapping("/v0/logistics/createCompanySite")
-    public ResultVo<String> createCompanySite(SiteForm siteForm) {
+    public ResultVo<String> createCompanySite(@Validated SiteForm siteForm) {
         return null;
     }
 

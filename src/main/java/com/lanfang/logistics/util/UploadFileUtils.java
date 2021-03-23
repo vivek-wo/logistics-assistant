@@ -23,7 +23,7 @@ public class UploadFileUtils {
         }
         String fileName = file.getOriginalFilename();
         String type = fileName.indexOf(".") != -1 ? fileName.substring(fileName.lastIndexOf(".") + 1) : "";
-        String saveFileName = type + "_" + UUID.randomUUID().toString();
+        String saveFileName = UUID.randomUUID().toString() + "." + type;
         File licenseFile = new File(path + saveFileName);
         file.transferTo(licenseFile);
         return saveFileName;
