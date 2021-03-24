@@ -36,14 +36,14 @@ import java.util.List;
 @RequestMapping("/api")
 public class UserController {
 
-    private PropertiesConfiguration propertiesConfiguration;
-
     private IUserService userService;
 
     @Autowired
     public UserController(IUserService userService) {
         this.userService = userService;
     }
+
+    private PropertiesConfiguration propertiesConfiguration;
 
     @Autowired
     public void setPropertiesConfiguration(PropertiesConfiguration propertiesConfiguration) {
@@ -61,7 +61,8 @@ public class UserController {
         }
         User newUser = new User(userForm.getPhone(), "123456", userForm.getName(), userForm.getPhone());
         if (userForm.getIdCardFrontFile() != null && userForm.getIdCardBackFile() != null) {
-            String basePath = request.getServletContext().getRealPath(propertiesConfiguration.getUploadFilePath());
+            //TODO 替换本地路径
+            String basePath = request.getServletContext().getRealPath(propertiesConfiguration.getUploadIDPhotoPath());
             try {
                 String frontPath = UploadFileUtils.saveImageFile(basePath, userForm.getIdCardFrontFile());
                 newUser.setIdcardFrontPath(frontPath);

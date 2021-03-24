@@ -92,8 +92,8 @@ CREATE TABLE `t_site`  (
   `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '网点地址',
   `contactUser` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '网点联系人',
   `contactPhone` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '网点联系电话',
-  `startTime` timestamp NULL DEFAULT NULL COMMENT '网点开始营业时间',
-  `endTime` timestamp NULL DEFAULT NULL COMMENT '网点结束营业时间',
+  `sitePhotoPath` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '网点照片',
+  `businessTime` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL '网点营业时间',
   `companyId` bigint NOT NULL COMMENT '公司Id',
   `createTime` timestamp NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE

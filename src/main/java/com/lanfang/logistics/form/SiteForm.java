@@ -2,11 +2,13 @@ package com.lanfang.logistics.form;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
+@Data
 @ApiModel("创建公司网点的表单数据")
 public class SiteForm {
 
@@ -43,10 +45,7 @@ public class SiteForm {
     @ApiModelProperty("网点照片")
     private MultipartFile photoFile;
 
-    @ApiModelProperty("网点营业开始时间")
-    private String startTime;
-
-    @ApiModelProperty("网点营业结束时间")
-    private String endTime;
+    @ApiModelProperty("网点营业时间")
+    private String businessTime;
 
 }

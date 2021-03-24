@@ -71,16 +71,16 @@ public class Site implements Serializable {
     private String contactPhone;
 
     /**
-     * 网点开始营业时间
+     * 网点照片
      */
-    @TableField("startTime")
-    private Date startTime;
+    @TableField("sitePhotoPath")
+    private String sitePhotoPath;
 
     /**
-     * 网点结束营业时间
+     * 网点营业时间
      */
-    @TableField("endTime")
-    private Date endTime;
+    @TableField("businessTime")
+    private String businessTime;
 
     /**
      * 公司Id

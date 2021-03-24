@@ -1,4 +1,6 @@
 package com.lanfang.logistics.vo;
 
-public class CompanySiteVo {
+import com.lanfang.logistics.entity.Site;
+
+public class CompanySiteVo extends Site {
 }

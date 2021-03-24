@@ -3,8 +3,10 @@ package com.lanfang.logistics.controller;
 
 import com.lanfang.logistics.configuration.PropertiesConfiguration;
 import com.lanfang.logistics.entity.Company;
+import com.lanfang.logistics.entity.User;
 import com.lanfang.logistics.form.CompanyForm;
 import com.lanfang.logistics.service.ICompanyService;
+import com.lanfang.logistics.service.IUserService;
 import com.lanfang.logistics.util.UploadFileUtils;
 import com.lanfang.logistics.vo.CompanyVo;
 import com.lanfang.logistics.vo.ResultVo;
@@ -40,10 +42,12 @@ public class CompanyController {
 
     private PropertiesConfiguration propertiesConfiguration;
 
+    private IUserService userService;
     private ICompanyService companyService;
 
     @Autowired
-    public CompanyController(ICompanyService companyService) {
+    public CompanyController(IUserService userService, ICompanyService companyService) {
+        this.userService = userService;
         this.companyService = companyService;
     }
 
@@ -55,15 +59,20 @@ public class CompanyController {
     @ApiOperation("创建公司")
     @PostMapping("/v0/logistics/createCompany")
     public ResultVo<Long> createCompany(CompanyForm companyForm, HttpServletRequest request) {
+        User user = this.userService.getById(companyForm.getLegalUserId());
+        if (user == null) {
+            return ResultVo.errorWidthService("用户不存在");
+        }
         Company company = new Company(companyForm.getName(), companyForm.getRegion(), companyForm.getAddress(),
                 companyForm.getLegalUserId());
         if (companyForm.getLicenseFile() != null || companyForm.getDoorImageFile() != null
                 || companyForm.getRoadTransportFile() != null) {
-//        String path = ClassUtils.getDefaultClassLoader().getResource("static/images").getPath();
+            //TODO 替换本地路径
             String basePath = request.getServletContext().getRealPath(propertiesConfiguration.getUploadFilePath());
+            String baseIDPath = request.getServletContext().getRealPath(propertiesConfiguration.getUploadIDPhotoPath());
             try {
                 if (companyForm.getLicenseFile() != null) {
-                    String localPath = UploadFileUtils.saveImageFile(basePath, companyForm.getLicenseFile());
+                    String localPath = UploadFileUtils.saveImageFile(baseIDPath, companyForm.getLicenseFile());
                     company.setLicensePath(localPath);
                 }
                 if (companyForm.getDoorImageFile() != null) {
@@ -71,7 +80,7 @@ public class CompanyController {
                     company.setDoorImagePath(localPath);
                 }
                 if (companyForm.getRoadTransportFile() != null) {
-                    String localPath = UploadFileUtils.saveImageFile(basePath, companyForm.getRoadTransportFile());
+                    String localPath = UploadFileUtils.saveImageFile(baseIDPath, companyForm.getRoadTransportFile());
                     company.setRoadLicensePath(localPath);
                 }
             } catch (IOException e) {

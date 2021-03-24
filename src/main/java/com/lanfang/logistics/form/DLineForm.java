@@ -2,41 +2,38 @@ package com.lanfang.logistics.form;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
+import javax.validation.constraints.Min;
+
+@Data
 @ApiModel("创建专线的表单数据")
 public class DLineForm {
 
-    @ApiModelProperty("公司标识Id")
-    private long companyId;
+    /**
+     * 开始网点Id
+     */
+    @ApiModelProperty("开始网点Id")
+    @Min(value = 1, message = "开始网点不能为空")
+    private Long startSiteId;
 
-    @ApiModelProperty("收货联系人")
-    private String recUserName;
+    /**
+     * 结束网点Id
+     */
+    @ApiModelProperty("到达网点Id")
+    @Min(value = 1, message = "到达网点不能为空")
+    private Long endSiteId;
 
-    @ApiModelProperty("收货联系电话")
-    private String recUserPhone;
+    /**
+     * 中间网点Id集合
+     */
+    @ApiModelProperty("中间网点Id")
+    private String middleSiteIds;
 
-    @ApiModelProperty("收货营业时间")
-    private String recTime;
-
-    @ApiModelProperty("收货地区")
-    private String recRegion;
-
-    @ApiModelProperty("收货地址")
-    private String recAdress;
-
-    @ApiModelProperty("提货联系人")
-    private String pickUserName;
-
-    @ApiModelProperty("提货联系电话")
-    private String pickUserPhone;
-
-    @ApiModelProperty("提货营业时间")
-    private String pickTime;
-
-    @ApiModelProperty("提货地区")
-    private String pickRegion;
-
-    @ApiModelProperty("提货地址")
-    private String pickAdress;
-
+    /**
+     * 公司Id
+     */
+    @ApiModelProperty("公司Id")
+    @Min(value = 1, message = "公司不能为空")
+    private Long companyId;
 }
