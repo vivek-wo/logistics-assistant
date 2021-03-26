@@ -8,6 +8,7 @@ import com.lanfang.logistics.form.DLineForm;
 import com.lanfang.logistics.service.ICompanyService;
 import com.lanfang.logistics.service.IDedicatedLineService;
 import com.lanfang.logistics.service.ISiteService;
+import com.lanfang.logistics.vo.CompanySiteVo;
 import com.lanfang.logistics.vo.DedicatedLineVo;
 import com.lanfang.logistics.vo.ResultVo;
 import io.swagger.annotations.Api;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.Min;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -93,7 +95,29 @@ public class DedicatedLineController {
     @GetMapping("/v0/logistics/queryDedicatedLine")
     public ResultVo<List<DedicatedLineVo>> queryDedicatedLine(
             @Validated @Min(value = 1, message = "公司Id不能为空") long companyId, String region) {
+        List<DedicatedLine> lineList = this.dedicatedLineService.queryByCompanyId(companyId);
+        List<DedicatedLineVo> dedicatedLineVoList = new ArrayList<>();
+        for (DedicatedLine line : lineList) {
+            DedicatedLineVo dedicatedLineVo = new DedicatedLineVo();
+            dedicatedLineVo.setStartSite(querySiteById(line.getStartSiteId()));
+            dedicatedLineVo.setEndSite(querySiteById(line.getEndSiteId()));
+            if (line.getMiddleSiteIds() != null) {
+                String[] middleIds = line.getMiddleSiteIds().split(",");
+                List<CompanySiteVo> middleCSVoList = new ArrayList<>();
+                dedicatedLineVo.setMiddleSites(middleCSVoList);
+                for (String id : middleIds) {
+                    middleCSVoList.add(querySiteById(Long.parseLong(id)));
+                }
+            }
+            dedicatedLineVoList.add(dedicatedLineVo);
+        }
+        return ResultVo.successWidthBody(dedicatedLineVoList);
+    }
 
-        return null;
+    private CompanySiteVo querySiteById(long id) {
+        CompanySiteVo companySiteVo = new CompanySiteVo();
+        Site site = this.siteService.getById(id);
+        BeanUtils.copyProperties(site, companySiteVo);
+        return companySiteVo;
     }
 }

@@ -61,7 +61,7 @@ public class DedicatedLine implements Serializable {
      * 创建时间
      */
     @TableField(value = "createTime", fill = FieldFill.INSERT)
-    @JsonFormat(pattern = "yyyy-MM-dd HH-mm-ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
 

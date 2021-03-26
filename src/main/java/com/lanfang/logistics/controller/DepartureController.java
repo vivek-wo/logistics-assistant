@@ -1,17 +1,28 @@
 package com.lanfang.logistics.controller;
 
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.lanfang.logistics.entity.Departure;
+import com.lanfang.logistics.service.IDepartureService;
 import com.lanfang.logistics.vo.ResultVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author vivek
@@ -22,10 +33,35 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class DepartureController {
 
+    private final IDepartureService departureService;
+
+    @Autowired
+    public DepartureController(IDepartureService departureService) {
+        this.departureService = departureService;
+    }
+
     @ApiOperation("新增发车")
     @PostMapping("/v0/logistics/createDepartureTime")
-    public ResultVo<String> createDepartureTime(long startSite, String middleSites, long endSite) {
-        return null;
+    public ResultVo<String> createDepartureTime(long dedicatedLineId, String departureTime) {
+        Departure departure = new Departure();
+        departure.setDedicatedLineId(dedicatedLineId);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            departure.setStartDepartureTime(simpleDateFormat.parse(departureTime));
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return ResultVo.errorWidthService("时间错误");
+        }
+        this.departureService.save(departure);
+        return ResultVo.successOnlyMessage("新增成功");
+    }
+
+    @ApiOperation("查询发车时间")
+    @GetMapping("/v0/logistics/getDepartureTime")
+    public ResultVo<List<Departure>> getDepartureTime(long companyId) {
+        IPage<Departure> iPage = new Page<>(1, 4);
+        IPage<Departure> listPage = this.departureService.queryByCompanyId(iPage);
+        return ResultVo.successWidthBody(listPage.getRecords());
     }
 
 }
