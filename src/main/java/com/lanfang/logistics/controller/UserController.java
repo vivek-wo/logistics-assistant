@@ -55,24 +55,25 @@ public class UserController {
     public ResultVo<Long> createUser(@Validated @ApiParam(value = "用户信息") UserForm userForm, HttpServletRequest request) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("phone", userForm.getPhone());
-        List<User> userList = this.userService.list(queryWrapper);
-        if (userList != null && !userList.isEmpty()) {
-            //已经存在这个用户,暂不处理
+        User user = this.userService.getOne(queryWrapper, false);
+        if (user == null) {
+            user = new User(userForm.getPhone(), "123456", userForm.getName(), userForm.getPhone());
+        } else {
+            user.setName(userForm.getName());
         }
-        User newUser = new User(userForm.getPhone(), "123456", userForm.getName(), userForm.getPhone());
         if (userForm.getIdCardFrontFile() != null && userForm.getIdCardBackFile() != null) {
             //TODO 替换本地路径
             String basePath = request.getServletContext().getRealPath(propertiesConfiguration.getUploadIDPhotoPath());
             try {
                 String frontPath = UploadFileUtils.saveImageFile(basePath, userForm.getIdCardFrontFile());
-                newUser.setIdcardFrontPath(frontPath);
+                user.setIdcardFrontPath(frontPath);
                 String backPath = UploadFileUtils.saveImageFile(basePath, userForm.getIdCardBackFile());
-                newUser.setIdcardBackPath(backPath);
+                user.setIdcardBackPath(backPath);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        this.userService.save(newUser);
-        return ResultVo.successWidthBody(newUser.getId());
+        this.userService.saveOrUpdate(user);
+        return ResultVo.successWidthBody(user.getId());
     }
 }

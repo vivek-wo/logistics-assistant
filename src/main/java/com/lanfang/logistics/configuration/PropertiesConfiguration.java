@@ -10,4 +10,8 @@ import org.springframework.stereotype.Component;
 public class PropertiesConfiguration {
     private String uploadFilePath;
     private String uploadIDPhotoPath;
+
+    private String wxTokenUrl;
+    private String wxAppId;
+    private String wxSecret;
 }
